@@ -25,7 +25,7 @@ class Task
     private $description;
 
     /**
-     * @ORM\OneToMany(targetEntity=Tag::class, mappedBy="task")
+     * @ORM\ManyToMany(targetEntity=Tag::class, inversedBy="tasks")
      */
     private $tags;
 
@@ -68,7 +68,6 @@ class Task
     {
         if (!$this->tags->contains($tag)) {
             $this->tags[] = $tag;
-            $tag->setTask($this);
         }
 
         return $this;
@@ -76,12 +75,7 @@ class Task
 
     public function removeTag(Tag $tag): self
     {
-        if ($this->tags->removeElement($tag)) {
-            // set the owning side to null (unless already changed)
-            if ($tag->getTask() === $this) {
-                $tag->setTask(null);
-            }
-        }
+        $this->tags->removeElement($tag);
 
         return $this;
     }

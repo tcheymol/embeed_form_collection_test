@@ -4,6 +4,7 @@ namespace App\Controller\Admin;
 
 use App\Entity\Task;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 
 class TaskCrudController extends AbstractCrudController
@@ -17,6 +18,7 @@ class TaskCrudController extends AbstractCrudController
     {
         return [
             TextField::new('description'),
+            AssociationField::new('tags'),
         ];
     }
 }
