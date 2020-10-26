@@ -25,7 +25,7 @@ class Task
     private $description;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Tag::class, inversedBy="tasks")
+     * @ORM\ManyToMany(targetEntity=Tag::class, inversedBy="tasks", cascade={"persist"})
      */
     private $tags;
 

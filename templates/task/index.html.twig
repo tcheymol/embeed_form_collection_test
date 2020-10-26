@@ -18,6 +18,22 @@
     </style>
 
     <div class="example-wrapper">
+        <hr/>
+        <h1>Create task : </h1>
+        <div>
+            {{ form_start(form) }}
+            {{ form_row(form.description) }}
+            <h3>Tags</h3>
+            <ul class="tags" data-prototype="{{ form_widget(form.tags.vars.prototype)|e('html_attr') }}">
+                {% for tag in form.tags %}
+                    <li>{{ form_row(tag.name) }}</li>
+                {% endfor %}
+            </ul>
+            <button type="submit">Submit</button>
+            {{ form_end(form) }}
+            <button type="button" class="add_item_link" data-collection-holder-class="tags">Add a tag</button>
+        </div>
+        <hr/>
         <h1>Tasks : </h1>
         <hr/>
         {% for task in tasks %}
@@ -35,4 +51,9 @@
             {% endfor %}
         </div>
     </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ encore_entry_script_tags('app') }}
+    {{ parent() }}
 {% endblock %}
